@@ -1,49 +1,63 @@
 // Packages required for project
 const fs = require('fs')
 const inquirer = require('inquirer');
-const { resolve } = require('path');
 
-// Inquire prompts employee that ask if you need to add another employee
+const team = new team()
 
-inquirer.registerPrompt("loop", require("inquirer-loop")(inquirer));
+// menu that prompts user to add engineer and intern after adding manager
 
-inquirer.prompt({
-  type: "loop",
-  name: "items",
-  message: "Create new employee card?",
-  questions: [
+function addTeam(option) {
+  if (option === 'addEngineer') {
+    addEngineer();
+  }
+  if (option === 'addIntern') {
+    addIntern();
+  }
+  if (option === 'finish')  {
+    team.saveFile()
+  }
+}
+
+inquirer.prompt([
     {
       type: 'input',
-      message: 'Employee title?',
-      name: 'title',
+      message: "Manager's title?",
+      name: 'managerName',
     },
     {
       type: 'input',
-      message: 'Name?',
-      name: 'name',
+      message: "Manager's employee ID?",
+      name: 'managerId',
     },
     {
       type: 'input',
-      message: 'Enter employee email:',
-      name: 'email',
+      message: "Enter manager's email:",
+      name: 'managerEmail',
     },
     {
       type: 'input',
-      message: 'Enter link to their GitHub or portfolio website:',
-      name: 'portfolio',
+      message: "Enter manager's phone number:",
+      name: 'managerPhone',
     },
-  ],
-}).then((response) =>{
-  console.table(response)
-  fs.writeFile("index.html", ``)
+  ]).then((response) =>{
+    const manager = new Manager(
+      data.managerName,
+      data.managerId,
+      data.managerEmail,
+      data.managerPhone
+    );
+  console.table(response);
+
+  
 });
 
+// TODO: Create a function to write README file
+function writeToFile(fileName, data) {}
 
-  //Function intitializing app
-  function init() {
-    console.log()
-  }
-  
-  // Function call to initialize app
-  init();
-  
+// TODO: Create a function to initialize app
+function init() {
+  console.log()
+}
+
+// Function call to initialize app
+init();
