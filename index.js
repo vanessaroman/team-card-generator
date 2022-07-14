@@ -1,10 +1,11 @@
 // Packages required for project
 const fs = require('fs');
 const inquirer = require('inquirer');
-// const Intern = require('./lib/intern');
+const Intern = require('./lib/intern');
 const Manager = require('./lib/manager');
-// const Engineer = require('./lib/engineer');
+const Engineer = require('./lib/engineer');
 var employeeArr = []
+
 
 // manager prompt questions
 function start() {
@@ -18,6 +19,8 @@ inquirer.prompt([
   }
 ]).then(response =>{
   console.log(response.newMember)
+
+  // prompt choice menu
 
   if (response.newMember === "Add manager"){
     return addManager()
@@ -68,145 +71,139 @@ inquirer.prompt([
 
 })};
 
-// // engineer prompt questions
-// function addEngineer() {
-//   inquirer.prompt([
-//     {
-//       type: 'input',
-//       message: "Engineer's title?",
-//       name: 'engineerName',
-//     },
-//     {
-//       type: 'input',
-//       message: "Engineer's employee ID?",
-//       name: 'engineerId',
-//     },
-//     {
-//       type: 'input',
-//       message: "Enter engineer's email:",
-//       name: 'engineerEmail',
-//     },
-//     {
-//       type: 'input',
-//       message: "Enter engineer's gitHub account:",
-//       name: 'engineerGithub',
-//     },
-//     { name: 'addMore',
-//       type: 'list',
-//       choices: [
-//         {
-//           value: 'addEngineer',
-//           name: 'Add engineer',
-//         },
-//         {
-//           value: 'addIntern',
-//           name: 'Add intern',
-//         },
-//         {
-//           value: 'finish',
-//           name: 'Finish',
-//         },
-//       ],
-//     }
-//   ])
-//   .then((response) => {
-//     const engineer = new Engineer(
-//       response.engineerId,
-//       response.engineerName,
-//       response.engineerEmail,
-//       response.engineerGithub
-//     );
-//     nextTeam(response.addMore);  
-//   });
-// }
+// engineer prompt questions
+function addEngineer() {
+  inquirer.prompt([
+    {
+      type: 'input',
+      message: "Engineer's title?",
+      name: 'engineerName',
+    },
+    {
+      type: 'input',
+      message: "Engineer's employee ID?",
+      name: 'engineerId',
+    },
+    {
+      type: 'input',
+      message: "Enter engineer's email:",
+      name: 'engineerEmail',
+    },
+    {
+      type: 'input',
+      message: "Enter engineer's gitHub account:",
+      name: 'engineerGithub',
+    }
+  ])
+  .then((response) => {
+    const engineer = new Engineer(
+      response.engineerId,
+      response.engineerName,
+      response.engineerEmail,
+      response.engineerGithub
+    );
+   
+    employeeArr.push(engineer);
+      
+      return start();
+  });
+}
 
-// // intern prompt questions
-// function addIntern() {
-//   inquirer.prompt([
-//     {
-//       type: 'input',
-//       message: "Intern's title?",
-//       name: 'internName',
-//     },
-//     {
-//       type: 'input',
-//       message: "Intern's employee ID?",
-//       name: 'internId',
-//     },
-//     {
-//       type: 'input',
-//       message: "Enter intern's email:",
-//       name: 'internEmail',
-//     },
-//     {
-//       type: 'input',
-//       message: "Enter intern's school:",
-//       name: 'internSchool',
-//     },
-//     { name: 'addMore',
-//       type: 'list',
-//       choices: [
-//         {
-//           value: 'addEngineer',
-//           name: 'Add engineer',
-//         },
-//         {
-//           value: 'addIntern',
-//           name: 'Add intern',
-//         },
-//         {
-//           value: 'finish',
-//           name: 'Finish',
-//         },
-//       ],
-//     }
-//   ])
-//   .then((response) => {
-//     const intern = new Intern(
-//       response.internName,
-//       response.internId,
-//       response.internEmail,
-//       response.internSchool
-//     );
-//     nextTeam(response.addMore);  
-//   });
-// }
+// intern prompt questions
+function addIntern() {
+  inquirer.prompt([
+    {
+      type: 'input',
+      message: "Intern's title?",
+      name: 'internName',
+    },
+    {
+      type: 'input',
+      message: "Intern's employee ID?",
+      name: 'internId',
+    },
+    {
+      type: 'input',
+      message: "Enter intern's email:",
+      name: 'internEmail',
+    },
+    {
+      type: 'input',
+      message: "Enter intern's school:",
+      name: 'internSchool',
+    },
+    { name: 'addMore',
+      type: 'list',
+      choices: [
+        {
+          value: 'addEngineer',
+          name: 'Add engineer',
+        },
+        {
+          value: 'addIntern',
+          name: 'Add intern',
+        },
+        {
+          value: 'finish',
+          name: 'Finish',
+        },
+      ],
+    }
+  ])
+  .then((response) => {
+    const intern = new Intern(
+      response.internName,
+      response.internId,
+      response.internEmail,
+      response.internSchool
+    );
+    
+      employeeArr.push(intern);
+      
+      return start();
+  });
+}
 start()
 
 
-function finish() {
+function template(cardsHtml) { 
   
-  var cardsHtml = []
+  return `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team Info Cards</title>
+</head>
+<body>
+
+<div id="cards-box">
+${cardsHtml}
+</div>
+
+</body>
+</html>
+`
+}
+
+
+function finish() {
+  let cardsHtml = ""
 
   for (let i = 0 ; i < (employeeArr.length); i++) {
     // console.log(i)
     console.log(employeeArr[i].renderBaseHTML())
-    employeeArr.push(employeeArr[i].renderBaseHTML())
+    cardsHtml += employeeArr[i].renderBaseHTML()
   }
-  fs.writeFile("test.html", template, err => {
+console.log(cardsHtml)
+  fs.writeFile("test.html", template(cardsHtml), err => {
     if (err) throw err
   } );
   
   // // console.log(cardsHtml)
   
-  var template = `
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Team Info Cards</title>
-  </head>
-  <body>
-  
-  <div id="cards-box">
-  ${cardsHtml}
-  </div>
-  
-  </body>
-  </html>
-  `
 
 
 }
