@@ -97,8 +97,8 @@ function addEngineer() {
   ])
   .then((response) => {
     const engineer = new Engineer(
-      response.engineerId,
       response.engineerName,
+      response.engineerId,
       response.engineerEmail,
       response.engineerGithub
     );
@@ -165,7 +165,7 @@ function addIntern() {
 }
 start()
 
-
+// function creating html template and insetting array from finish()
 function template(cardsHtml) { 
   
   return `
@@ -193,7 +193,7 @@ function finish() {
   let cardsHtml = ""
 
   for (let i = 0 ; i < (employeeArr.length); i++) {
-    // console.log(i)
+    // employee array been inserted into renderBaseHTML from employee class
     console.log(employeeArr[i].renderBaseHTML())
     cardsHtml += employeeArr[i].renderBaseHTML()
   }
@@ -202,9 +202,5 @@ console.log(cardsHtml)
     if (err) throw err
   } );
   
-  // // console.log(cardsHtml)
-  
-
-
 }
 
