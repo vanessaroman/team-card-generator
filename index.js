@@ -199,7 +199,7 @@ function finish() {
     cardsHtml += employeeArr[i].renderBaseHTML()
   }
 console.log(cardsHtml)
-  fs.writeFile("test.html", template(cardsHtml), err => {
+  fs.writeFile("index.html", template(cardsHtml), err => {
     if (err) throw err
   } );
   
