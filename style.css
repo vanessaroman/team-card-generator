@@ -1,9 +1,30 @@
+*{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
 .card {
     /* Add shadows to create the "card" effect */
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
+    border-radius: 15px;
+    background-color: pink;
+    margin-bottom: 10px;
+    min-width: 300px;
+    display: inline-block;
+
+  }
+
+  #myTeam{
+      background-color:  rgb(49, 157, 121);
+      text-align: center;
+      border-radius: 15px;
+      padding: 3px;
+      margin-bottom: 5px;
   }
   
+  .h3{
+      background-color: rgb(49, 157, 121);
+  }
   /* On mouse-over, add a deeper shadow */
   .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
@@ -12,4 +33,5 @@
   /* Add some padding inside the card container */
   .container {
     padding: 2px 16px;
+    
   }

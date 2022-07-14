@@ -59,8 +59,8 @@ inquirer.prompt([
     
   ]).then((response) =>{
     const manager = new Manager(
-      response.managerId,
       response.managerName,
+      response.managerId,
       response.managerEmail,
       response.managerPhone
     );
@@ -76,7 +76,7 @@ function addEngineer() {
   inquirer.prompt([
     {
       type: 'input',
-      message: "Engineer's title?",
+      message: "Engineer's name?",
       name: 'engineerName',
     },
     {
@@ -114,7 +114,7 @@ function addIntern() {
   inquirer.prompt([
     {
       type: 'input',
-      message: "Intern's title?",
+      message: "Intern's name?",
       name: 'internName',
     },
     {
@@ -175,10 +175,11 @@ function template(cardsHtml) {
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Team Info Cards</title>
+<link rel="stylesheet" href="./style.css">
+<title id="title">Team Info Cards</title>
 </head>
 <body>
-
+<div id="myTeam"><h1>My Team</h1></div>
 <div id="cards-box">
 ${cardsHtml}
 </div>
