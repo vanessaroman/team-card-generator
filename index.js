@@ -205,3 +205,9 @@ console.log(cardsHtml)
   
 }
 
+
+module.exports = addManager;
+module.exports = addEngineer;
+module.exports = addIntern;
+module.exports = template;
+module.exports = finish;
