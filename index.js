@@ -184,6 +184,7 @@ function template(cardsHtml) {
 ${cardsHtml}
 </div>
 
+
 </body>
 </html>
 `
@@ -195,8 +196,8 @@ function finish() {
 
   for (let i = 0 ; i < (employeeArr.length); i++) {
     // employee array been inserted into renderBaseHTML from employee class
-    console.log(employeeArr[i].renderBaseHTML())
-    cardsHtml += employeeArr[i].renderBaseHTML()
+    console.log(employeeArr[i].renderSpecificHTML())
+    cardsHtml += employeeArr[i].renderSpecificHTML()
   }
 console.log(cardsHtml)
   fs.writeFile("index.html", template(cardsHtml), err => {
